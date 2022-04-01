@@ -115,51 +115,92 @@ a {
     padding: 0;
 }
 
-.tooltip-trigger:hover {
+.easyinsight-kpi-trigger:hover {
   background: #A4E1F6;
 }
 
-.tooltip-trigger {
+.easyinsight-kpi-trigger {
   text-decoration:none;
   position:relative;
   cursor: pointer;
   transition: all 0.3s ease;
-}
+} */
  
-.tooltip-trigger div {
+.easyinsight-kpi-trigger .easyisignt-tooltip {
   display:none;
   color:#333333;
   background:white; 
 }
- 
-.tooltip-trigger span img div {
-  float:left;
-  margin:0px 8px 8px 0;
+
+.easyisignt-tooltip span  {
+  display: flex;
+  align-items: flex-start;
+  margin-right: 8px;
 }
  
-.tooltip-trigger:hover div {
-  display:block;
+.easyisignt-tooltip span h5 {
+  align-content: center;
+  text-align: center;
+  margin: unset;
+}
+ 
+.easyinsight-kpi-trigger:hover .easyisignt-tooltip {
+  display:flex !important;
   top:0;
   left:0;
   position:absolute;
   z-index:1000;
   width:auto;
-  max-width:320px;
-  min-height:128px;
+  height: auto;
+  max-width: fit-content;
+  max-height: fit-content;
   border:1px solid rgba(0,0,0,.15);
-  margin-top:15px;
+  margin-top: 18px !important;
   overflow: visible;
   padding:8px;
   border-radius: 0.25rem;
 }
 
-.tooltip-trigger div::after {
+.easyinsight-kpi-trigger .easyisignt-tooltip::after {
   content: "";
   position: absolute;
   bottom: 100%;
-  left: 50%;
+  left: 10%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent rgba(0,0,0,.15) transparent;
+}
+
+.easyinsight-pin-btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 5px;
+  color: #333;
+  background-color: #fff;
+  user-select: none;
+  background-image: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.easyinsight-pin-btn:hover {
+  color: #333 !important;
+  background-color: #e6e6e6 !important;
+  border-color: #adadad !important;
+}
+
+.easyinsight-pin-btn img {
+  width: 18px;
+  height: 18px;
 }
