@@ -1,6 +1,7 @@
 let metrics = [];
 let ul;
 let rawDataMetrics = [];
+let allRawDataMetrics = [];
 
 
 $(document).ready(() => {
@@ -8,9 +9,39 @@ $(document).ready(() => {
   // On Value Change in the Search Bar
   document.getElementById("easyInsight-search-pinboard").addEventListener('input', (event) => {
     let searchTest = document.getElementById("easyInsight-search-pinboard").value;
-    let filtered_metrics = metrics.filter(m => m.toUpperCase().indexOf(searchTest.toUpperCase()) !== -1);
-    dumpMetrics(filtered_metrics);
+    if(document.getElementById("easyInsight-switch-pinboard").checked){
+      let filtered_metrics = allRawDataMetrics.filter(m => m.toUpperCase().indexOf(searchTest.toUpperCase()) !== -1);
+      dumpMetrics(filtered_metrics);
+    }else{
+      let filtered_metrics = metrics.filter(m => m.toUpperCase().indexOf(searchTest.toUpperCase()) !== -1);
+      dumpMetrics(filtered_metrics);
+    }
+
   });
+
+  // On Value Change in the Search Bar
+  document.getElementById("easyInsight-switch-pinboard").addEventListener('input', (event) => {
+    let switchValue = document.getElementById("easyInsight-switch-pinboard").checked;
+    console.log(switchValue);
+    if(switchValue){
+      document.getElementById("easyInsight-search-pinboard").placeholder = "Search All Metrics";
+      //Search For All Items
+      // dumpMetrics(filtered_metrics);
+      let aj = $.ajax({
+        url: `https://624561e47701ec8f7251298c.mockapi.io/easyinsights/oacmetrics`,
+        dataType: "json"
+      });
+      aj.done(function (data) {
+        allRawDataMetrics = data.map(i => i.value + " " + i.textlabel);
+        dumpMetrics(allRawDataMetrics);
+      });
+    }else{
+      document.getElementById("easyInsight-search-pinboard").placeholder = "Search Pinned Metrics";
+      // Only Pinned Items
+      dumpMetrics(metrics);
+    }
+  });
+
   // chrome.storage.sync.set({'pinnedMetrics': []});
   chrome.storage.sync.get('rawDataMetrics', (result) => {
     rawDataMetrics = result.rawDataMetrics;
